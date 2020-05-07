@@ -38,7 +38,7 @@ const Layout = ({ children }) => (
     <PageHead />
     <Wrapper>
     	{children}
-      <Link href="https://github.com/Hallonanton/react-puzzle" target="_blank" rel="noopener noreffer">
+      <Link href="https://github.com/Hallonanton/react-map" target="_blank" rel="noopener noreffer">
         <Github />
       </Link>
     </Wrapper>
@@ -46,10 +46,11 @@ const Layout = ({ children }) => (
       :root {
         --main-bg-color: #f4f6f9;
         --secondary-bg-color: #fff;
-        --main-text-color: #000;
+        --main-text-color: #212529;
         --main-box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        --btn-color: #fff;
-        --btn-bg: linear-gradient(#ff8e59, #ffb153);
+        --main-btn-color: #fff;
+        --main-btn-bg: #495057;
+        --hover-btn-bg: #212529;
       }
 
       body {
