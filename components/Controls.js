@@ -78,9 +78,9 @@ const Button = styled('button')`
 const ControlComponent = ({ onChange, onMove, onSave }) => (
   <Wrapper>
     <Controls>
-      <Label for="degrees">
+      <Label htmlFor="degrees">
         <span>Degrees</span><br/>
-        <input id="degrees" onChange={onChange} min="0" max="360" type="number" placeholder="Degrees"/>
+        <input id="degrees" onChange={onChange} step="90" min="0" max="360" type="number" placeholder="Degrees"/>
       </Label>
       <Button onClick={onMove}>Move</Button>
       <Button onClick={onSave}>Save</Button>

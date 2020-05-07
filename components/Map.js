@@ -45,13 +45,23 @@ const MapComponent  = compose(
   }),
   withScriptjs,
   withGoogleMap
-)(({ mapOptions, lat, lng }) => 
+)(({ mapOptions, strokeLength, iconPath, lat, lng }) => 
   <GoogleMap
     options={mapOptions}
     defaultZoom={14}
     defaultCenter={{ lat: lat, lng: lng }}
   >
-    <Marker position={{ lat: lat, lng: lng }} />
+    <Marker 
+      position={{ lat: lat, lng: lng }}
+    />
+    <Marker 
+      position={{ lat: lat, lng: lng }}
+      icon={{
+          path: iconPath,
+          scale: 1,
+          strokeWeight: 1
+      }}
+    />
   </GoogleMap>
 )
 
