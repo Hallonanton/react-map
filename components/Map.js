@@ -45,7 +45,7 @@ const MapComponent  = compose(
   }),
   withScriptjs,
   withGoogleMap
-)(({ mapOptions, strokeLength, iconPath, lat, lng }) => 
+)(({ mapOptions, strokeLength, iconPath, savedIconPaths, lat, lng }) => 
   <GoogleMap
     options={mapOptions}
     defaultZoom={14}
@@ -54,12 +54,26 @@ const MapComponent  = compose(
     <Marker 
       position={{ lat: lat, lng: lng }}
     />
+    {savedIconPaths && savedIconPaths.map((path, i) => (
+      <Marker 
+        key={i}
+        position={{ lat: lat, lng: lng }}
+        zIndex={1}
+        icon={{
+            path: path,
+            scale: 1,
+            strokeWeight: 2
+        }}
+      />
+    ))}
     <Marker 
       position={{ lat: lat, lng: lng }}
+      zIndex={2}
       icon={{
           path: iconPath,
           scale: 1,
-          strokeWeight: 1
+          strokeWeight: 2.5,
+          strokeColor: '#f00f00'
       }}
     />
   </GoogleMap>

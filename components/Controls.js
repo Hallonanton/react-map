@@ -14,16 +14,30 @@ const Wrapper = styled('div')`
 
 const Controls = styled('div')`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
-  padding: 5px;
+  padding: 15px 30px;
   background-color: var(--secondary-bg-color);
   box-shadow: var(--main-box-shadow);
   box-sizing: border-box;
 
   > * {
     margin: 10px;
+  }
+`
+
+const Description = styled('div')`
+  width: 100%;
+  margin-bottom: 15px;
+
+  h2 {
+    margin: 0px;
+  }
+
+  p {
+    font-size: 12px;
   }
 `
 
@@ -78,9 +92,13 @@ const Button = styled('button')`
 const ControlComponent = ({ onChange, onMove, onSave }) => (
   <Wrapper>
     <Controls>
+      <Description>
+        <h2>Instructions</h2>
+        <p>Use the "degrees input" to specify an angle. After an angle is set press "move" to draw a 20px line in that direction. Change the degree and keep pressing "move" to create a pattern. Pressing "save" will save that pattern to a list of pattern beneath the map and you will be able to create a new pattern from scratch. Have fun!</p>
+      </Description>
       <Label htmlFor="degrees">
         <span>Degrees</span><br/>
-        <input id="degrees" onChange={onChange} step="90" min="0" max="360" type="number" placeholder="Degrees"/>
+        <input id="degrees" onChange={onChange} min="0" max="360" type="number" placeholder="Degrees"/>
       </Label>
       <Button onClick={onMove}>Move</Button>
       <Button onClick={onSave}>Save</Button>

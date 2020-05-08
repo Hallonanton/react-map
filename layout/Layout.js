@@ -12,7 +12,7 @@ const Wrapper = styled('div')`
   justify-content: center;
   align-items: center;
 	width: 100%;
-  padding: 0px 15px;
+  padding: 30px 15px 100px;
   min-height: 100vh;
   box-sizing: border-box;
 `

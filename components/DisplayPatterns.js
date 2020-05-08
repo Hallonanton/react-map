@@ -8,18 +8,17 @@ import { preparePath } from './MapDrawer'
 ==============================================================================*/
 
 const Wrapper = styled('ul')`
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   max-width: 800px;
   padding: 0px;
-  margin-top: 15px;
+  margin: 15px -15px 0px -15px;
 `
 
 const Item = styled('li')`
   width: 25%;
   padding: 15px;
-  border-radius: 15px;
-  background-color: var(--secondary-bg-color);
-  box-shadow: var(--main-box-shadow);
   box-sizing: border-box;
   list-style: none;
 
@@ -27,14 +26,17 @@ const Item = styled('li')`
     position: relative;
     width: 100%;
     padding-bottom: 100%;
+    border-radius: 15px;
+    background-color: var(--secondary-bg-color);
+    box-shadow: var(--main-box-shadow);
   }
 
   svg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 10px;
+    left: 10px;
+    width: calc( 100% - 20px );
+    height: calc( 100% - 20px );
   }
 `
 
@@ -56,8 +58,8 @@ const Pattern = ({path}) => {
     const { x, y } = s
     sX = x < sX ? x : sX 
     sY = y < sY ? y : sY
-    lX = x < lX ? x : lX 
-    lY = y < lY ? y : lY
+    lX = x > lX ? x : lX 
+    lY = y > lY ? y : lY
   })
 
   if ( sX < 0 ) {
@@ -80,7 +82,8 @@ const Pattern = ({path}) => {
     })
   }
 
-  console.log(sX, sY, lX, lY)
+  lX = lX > 0 ? lX : 1
+  lY = lY > 0 ? lY : 1
 
   return (
     <Item>

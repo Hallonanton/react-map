@@ -39,7 +39,6 @@ class MapDrawer extends Component {
 
   state = {
     angle: undefined,
-    preparedPath: '',
     currentPath: [],
     savedPaths: [] 
   }
@@ -75,7 +74,6 @@ class MapDrawer extends Component {
           'x': prevSection.x + (angle === 180 ? -20 : 20),
           'y': prevSection.y
         })
-
       } else if ( angle === 90 || angle === 270 ) {
         currentPath.push({
           'type': 'V',
@@ -84,9 +82,11 @@ class MapDrawer extends Component {
         })
       } else {
 
-        // Deal with none right angles
-        //currentPath.push((Math.cos(Math.PI * angle / 180))*10 )
-        //currentPath.push((Math.cos(Math.PI * angle / 180))*10 )
+        currentPath.push({
+          'type': 'L',
+          'x': prevSection.x + (Math.cos(Math.PI * angle / 180))*10,
+          'y': prevSection.y + (Math.sin(Math.PI * angle / 180))*10
+        })
 
       }
 
@@ -98,17 +98,16 @@ class MapDrawer extends Component {
   }
 
   onSave = e => {
-    let { savedPaths, currentPath, preparedPath } = this.state
+    let { savedPaths, currentPath } = this.state
     savedPaths.push(currentPath)
     this.setState({
-      preparedPath: '',
       currentPath: [],
       savedPaths: savedPaths
     })
   }
 
   render () {
-    const { preparedPath, savedPaths } = this.state
+    const { currentPath, savedPaths } = this.state
     return (
       <Wrapper>
         <Controls 
@@ -117,7 +116,8 @@ class MapDrawer extends Component {
           onSave={this.onSave}
         />
         <MapComponent 
-          iconPath={preparedPath}
+          iconPath={preparePath(currentPath)}
+          savedIconPaths={savedPaths.map(path => preparePath(path))}
         />
         {savedPaths && savedPaths.length > 0 && <DisplayPatterns paths={savedPaths} />}
       </Wrapper>
