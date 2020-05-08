@@ -23,12 +23,15 @@ const Item = styled('li')`
   list-style: none;
 
   .inner {
+    display: block;
     position: relative;
     width: 100%;
     padding-bottom: 100%;
+    border: 0px;
     border-radius: 15px;
     background-color: var(--secondary-bg-color);
     box-shadow: var(--main-box-shadow);
+    outline: none;
     cursor: pointer;
   }
 
@@ -119,6 +122,7 @@ class Pattern extends Component {
 
     // Create SVG element
     let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns', 'http://www.w3.org/2000/svg')
     svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink')
     svg.setAttributeNS(null, 'viewBox', `${sX} ${sY} ${lX} ${lY}`)
 
@@ -141,25 +145,21 @@ class Pattern extends Component {
     const { svg } = this.state
     if ( !svg ) return
 
-    var a = window.document.createElement('a');
-    a.href = window.URL.createObjectURL(new Blob([this.ref.innerHTML], {type: 'image/svg+xml'}));
-    a.download = 'pattern.svg';
-
-    // Append anchor to body.
-    document.body.appendChild(a);
-    a.click();
-
-    // Remove anchor from body
-    document.body.removeChild(a);
+    var a = window.document.createElement('a')
+    a.href = window.URL.createObjectURL(new Blob([this.ref.innerHTML], {type: 'image/svg+xml'}))
+    a.download = 'pattern.svg'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
   }
 
   render () {
     return (
       <Item>
-        <div 
+        <button 
           className="inner"
           title="download"
-          onClick={this.download()}
+          onClick={this.download}
           ref={ref => this.handleRef(ref)} 
         />
       </Item>
