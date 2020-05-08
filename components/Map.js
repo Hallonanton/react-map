@@ -25,6 +25,8 @@ const MapElement = styled('div')`
   # Componet
 ==============================================================================*/
 
+const APIKEY = "AIzaSyCW4QqJpulINgrU-J1xtde6UYPCtVEWbNY"
+
 const MapComponent  = compose(
   withProps({
     mapOptions: {
@@ -38,7 +40,7 @@ const MapComponent  = compose(
     },
     lat: 57.7067214,
     lng: 11.9682732,
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCW4QqJpulINgrU-J1xtde6UYPCtVEWbNY&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${APIKEY}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <ContainerElement />,
     containerElement: <ContainerElement />,
     mapElement: <MapElement />,
@@ -54,13 +56,13 @@ const MapComponent  = compose(
     <Marker 
       position={{ lat: lat, lng: lng }}
     />
-    {savedIconPaths && savedIconPaths.map((path, i) => (
+    {savedIconPaths && savedIconPaths.map((icon, i) => (
       <Marker 
         key={i}
         position={{ lat: lat, lng: lng }}
         zIndex={1}
         icon={{
-            path: path,
+            path: icon.path,
             scale: 1,
             strokeWeight: 2
         }}
